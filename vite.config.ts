@@ -10,6 +10,6 @@ export default defineConfig({
       'Access-Control-Allow-Origin': '*',
     },
     port: 9000,
-    origin: 'http://localhost:9000/',
+    origin: 'http://localhost:9000/', // 微前端环境开发时支持图片等资源 https://github.com/tengmaoqing/vite-plugin-qiankun/issues/9
   },
 })
