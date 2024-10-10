@@ -1,0 +1,10 @@
+{
+  "name": "examples",
+  "description": "examples",
+  "scripts": {
+    "dev": "echo dev"
+  },
+  "devDependencies": {
+    "name": "workspace:*"
+  }
+}

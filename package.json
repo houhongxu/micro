@@ -1,0 +1,16 @@
+{
+  "scripts": {
+    "dev": "pnpm --recursive --parallel --filter=./apps/** dev",
+    "build": "pnpm --recursive --filter=./apps/** build"
+  },
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^4.3.0",
+    "@types/node": "^20.10.5",
+    "prettier": "^3.2.4",
+    "typescript": "^5.2.2"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@9.6.0+sha1.65cd48c20dd329b7f455088b6dd17d4d5b6d02e3"
+}
