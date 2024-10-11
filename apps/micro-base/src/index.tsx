@@ -1,20 +1,17 @@
+import App from './App'
+import { APP_ENUM, MICRO_CONFIG } from './consts'
 import { registerMicroApps, setDefaultMountApp, start } from 'qiankun'
+import { createRoot } from 'react-dom/client'
+import { BrowserRouter } from 'react-router-dom'
 
-registerMicroApps([
-  {
-    name: 'micro-react',
-    entry: '//localhost:9001',
-    container: '#base-container',
-    activeRule: '/micro-react',
-  },
-  {
-    name: 'micro-vue',
-    entry: '//localhost:9000',
-    container: '#base-container',
-    activeRule: '/micro-vue',
-  },
-])
+registerMicroApps(MICRO_CONFIG)
 
-setDefaultMountApp('/micro-react')
+setDefaultMountApp(APP_ENUM.vue)
+
+createRoot(document.getElementById('base-root')!).render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>,
+)
 
 start()
