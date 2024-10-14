@@ -4,7 +4,5 @@
   "scripts": {
     "dev": "echo dev"
   },
-  "devDependencies": {
-    "name": "workspace:*"
-  }
+  "devDependencies": {}
 }

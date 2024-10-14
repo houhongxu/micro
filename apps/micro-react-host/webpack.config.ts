@@ -84,12 +84,16 @@ const webpackConfig: WebpackConfiguration = {
     }),
     isDevelopment && new ReactRefreshWebpackPlugin(),
     new BlurhashWebpackPlugin(),
-    // new container.ModuleFederationPlugin({
-    //   name: 'hostApp',
-    //   remotes: {
-    //     remoteApp: 'remoteApp@http://localhost:9002/remoteEntry.js',
-    //   },
-    // }),
+    new container.ModuleFederationPlugin({
+      name: 'hostApp',
+      remotes: {
+        remoteApp: 'remoteApp@http://localhost:9002/remoteEntry.js',
+      },
+      shared: {
+        react: { singleton: true, eager: true },
+        'react-dom': { singleton: true, eager: true },
+      },
+    }),
   ].filter(Boolean),
   devServer: {
     static: {

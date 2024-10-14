@@ -14,8 +14,8 @@
     "ahooks": "^3.7.10",
     "high-order-ui": "^0.0.3",
     "query-string": "^8.1.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
     "react-router-dom": "^6.21.1",
     "viewerjs": "^1.11.6"
   },

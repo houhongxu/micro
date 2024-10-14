@@ -4,12 +4,14 @@ import BlurhashWebpackPlugin from 'blurhash-webpack-plugin'
 import { config } from 'dotenv'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+// import ModuleFederationRuntimePlugin from 'module-federation-runtime-webpack-plugin'
 import path from 'path'
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
 import { DefinePlugin, container } from 'webpack'
 import { WebpackConfiguration } from 'webpack-dev-server'
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
+const remoteFileName = 'remoteEntry.js'
 
 const env = config({
   path: path.join(__dirname, `./.env.${process.env.NODE_ENV}`),
@@ -44,12 +46,13 @@ const webpackConfig: WebpackConfiguration = {
 
   optimization: {
     // 最小化 __webpack_require__.u 内容改变的影响，分离webpack runtime文件
-    runtimeChunk: {
-      name: 'runtime', // module federation 问题导致无法使用
-    },
+    runtimeChunk: false, // module federation 导致无法使用
+    // runtimeChunk: 'single', // 使用ModuleFederationRuntimePlugin支持
+
     // 分包
     splitChunks: {
-      chunks: 'all', // module federation 需要仅分包异步js
+      chunks: 'async', // module federation 需要仅分包异步js
+      // chunks: 'all', // 使用ModuleFederationRuntimePlugin支持
     },
   },
   module: {
@@ -78,19 +81,31 @@ const webpackConfig: WebpackConfiguration = {
     new DefinePlugin({ 'process.env': JSON.stringify(env.parsed) }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, './src/templates/index.html'),
+      chunksSortMode: (a, b) => {
+        // qiankun需要保证main在最下面，在remoteEntry下面 https://qiankun.umijs.org/zh/faq#application-died-in-status-loading_source_code-you-need-to-export-the-functional-lifecycles-in-xxx-entry
+        if (a.includes('main')) return 1 // 确保 main 在最后
+        if (b.includes('main')) return -1 // 确保 main 在最后
+        return 0 // 其他 chunks 保持原有顺序
+      },
     }),
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash:8].css',
     }),
     isDevelopment && new ReactRefreshWebpackPlugin(),
     new BlurhashWebpackPlugin(),
-    // new container.ModuleFederationPlugin({
-    //   name: 'remoteApp',
-    //   filename: 'remoteEntry.js',
-    //   exposes: {
-    //     './Button': './src/components/Button',
-    //   },
-    // }),
+    new container.ModuleFederationPlugin({
+      name: 'remoteApp',
+      filename: remoteFileName,
+      exposes: {
+        './Button': './src/components/Button',
+      },
+      shared: {
+        react: { singleton: true, eager: true },
+        'react-dom': { singleton: true, eager: true },
+      },
+      library: { type: 'umd', name: 'remoteApp' }, // qiankun使用umd规范 https://github.com/umijs/qiankun/issues/1394#issuecomment-848495620
+    }),
+    // new ModuleFederationRuntimePlugin({ fileName: remoteFileName }),
   ].filter(Boolean),
   devServer: {
     static: {
