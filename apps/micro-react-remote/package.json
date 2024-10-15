@@ -24,6 +24,7 @@
     "@babel/preset-env": "^7.23.8",
     "@babel/preset-react": "^7.23.3",
     "@babel/preset-typescript": "^7.23.3",
+    "@module-federation/enhanced": "^0.6.10",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.11",
     "@types/babel__core": "^7.20.5",
     "@types/eslint": "^8.56.2",

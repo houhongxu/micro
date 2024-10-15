@@ -1,4 +1,5 @@
 import { name as packageName } from './package.json'
+import { ModuleFederationPlugin } from '@module-federation/enhanced/webpack'
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin'
 import BlurhashWebpackPlugin from 'blurhash-webpack-plugin'
 import { config } from 'dotenv'
@@ -48,11 +49,13 @@ const webpackConfig: WebpackConfiguration = {
     // 最小化 __webpack_require__.u 内容改变的影响，分离webpack runtime文件
     runtimeChunk: false, // module federation 导致无法使用，尝试了两种方法尚未解决
     // runtimeChunk: 'single', // 使用ModuleFederationRuntimePlugin支持
+    // runtimeChunk: 'single', // 使用v2支持
 
     // 分包
     splitChunks: {
       chunks: 'async', // module federation 需要仅分包异步js
       // chunks: 'all', // 使用ModuleFederationRuntimePlugin支持
+      // chunks: 'all', // 使用v2支持
     },
   },
   module: {
@@ -93,6 +96,19 @@ const webpackConfig: WebpackConfiguration = {
     }),
     isDevelopment && new ReactRefreshWebpackPlugin(),
     new BlurhashWebpackPlugin(),
+    // new ModuleFederationPlugin({
+    //   name: 'remoteApp',
+    //   filename: remoteFileName,
+    //   exposes: {
+    //     './Button': './src/components/Button',
+    //   },
+    //   shared: {
+    //     react: { singleton: true, eager: true },
+    //     'react-dom': { singleton: true, eager: true },
+    //   },
+    //   experiments: { federationRuntime: 'hoisted' }, // v2 https://module-federation.io/blog/hoisted-runtime.html
+    //   library: { type: 'umd', name: 'remoteApp' }, // qiankun使用umd规范 https://github.com/umijs/qiankun/issues/1394#issuecomment-848495620
+    // }),
     new container.ModuleFederationPlugin({
       name: 'remoteApp',
       filename: remoteFileName,

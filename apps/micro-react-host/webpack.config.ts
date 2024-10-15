@@ -1,4 +1,5 @@
 import { name as packageName } from './package.json'
+import { ModuleFederationPlugin } from '@module-federation/enhanced/webpack'
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin'
 import BlurhashWebpackPlugin from 'blurhash-webpack-plugin'
 import { config } from 'dotenv'
@@ -84,6 +85,16 @@ const webpackConfig: WebpackConfiguration = {
     }),
     isDevelopment && new ReactRefreshWebpackPlugin(),
     new BlurhashWebpackPlugin(),
+    // new ModuleFederationPlugin({
+    //   name: 'hostApp',
+    //   remotes: {
+    //     remoteApp: 'remoteApp@http://localhost:9002/remoteEntry.js',
+    //   },
+    //   shared: {
+    //     react: { singleton: true, eager: true },
+    //     'react-dom': { singleton: true, eager: true },
+    //   },
+    // }),
     new container.ModuleFederationPlugin({
       name: 'hostApp',
       remotes: {
