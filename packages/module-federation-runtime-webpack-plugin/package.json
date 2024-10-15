@@ -6,14 +6,12 @@
     "build": "rm -rf ./lib && tsc",
     "dev": "tsc --watch"
   },
-  "main": "./lib/index2.js",
+  "main": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "files": [
     "./lib"
   ],
-  "dependencies": {
-    "webpack-sources": "^3.2.3"
-  },
+  "dependencies": {},
   "devDependencies": {
     "webpack": "^5.89.0"
   }

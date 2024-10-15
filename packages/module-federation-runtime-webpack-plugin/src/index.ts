@@ -1,9 +1,9 @@
 import { Compiler, sources } from 'webpack'
 
-// 方案解决插件 https://github.com/module-federation/module-federation-examples/issues/646
-// 官方尚未感觉有必要合并pr https://github.com/webpack/webpack/pull/11843
+// 参考社区解决插件 https://github.com/module-federation/module-federation-examples/issues/646
+// 参考官方插件 https://github.com/module-federation/concat-runtime
+// 官方尚未合并pr https://github.com/webpack/webpack/pull/11843
 // v2才官方支持 https://module-federation.io/blog/hoisted-runtime.html#support-for-runtimechunk-single
-
 const pluginName = 'ModuleFederationRuntimeWebpackPlugin'
 
 // 定义插件的选项类型

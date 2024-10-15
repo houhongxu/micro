@@ -1,10 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const webpack_1 = require("webpack");
-// 方案解决插件 https://github.com/module-federation/module-federation-examples/issues/646
-// 官方尚未感觉有必要合并pr https://github.com/webpack/webpack/pull/11843
+// 参考社区解决插件 https://github.com/module-federation/module-federation-examples/issues/646
+// 参考官方插件 https://github.com/module-federation/concat-runtime
+// 官方尚未合并pr https://github.com/webpack/webpack/pull/11843
 // v2才官方支持 https://module-federation.io/blog/hoisted-runtime.html#support-for-runtimechunk-single
 const pluginName = 'ModuleFederationRuntimeWebpackPlugin';
+// 将runtimeChunk内容拷贝到remoteEntryChunk来支持runtime:'single'和splitChunk:'all'
 class ModuleFederationRuntimeWebpackPlugin {
     constructor({ fileName }) {
         if (!fileName) {
