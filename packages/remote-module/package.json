@@ -1,0 +1,21 @@
+{
+  "name": "remote-module",
+  "version": "0.0.1",
+  "description": "remote-module",
+  "scripts": {
+    "build": "rm -rf ./lib && tsc",
+    "dev": "tsc --watch"
+  },
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "files": [
+    "./lib"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+    "mini-css-extract-plugin": "^2.7.7",
+    "webpack": "^5.89.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  }
+}

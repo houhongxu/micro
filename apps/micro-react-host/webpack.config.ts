@@ -1,5 +1,5 @@
 import { name as packageName } from './package.json'
-import { ModuleFederationPlugin } from '@module-federation/enhanced/webpack'
+// import { ModuleFederationPlugin } from '@module-federation/enhanced/webpack'
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin'
 import BlurhashWebpackPlugin from 'blurhash-webpack-plugin'
 import { config } from 'dotenv'
