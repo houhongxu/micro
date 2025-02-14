@@ -1,20 +1,16 @@
-import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import path from 'path'
-import { DefinePlugin, Configuration } from 'webpack'
+import { Configuration, DefinePlugin } from 'webpack'
 
-// 用WebpackConfiguration是因为配置中配置了devServer
-const webpackConfig: Configuration = {
-  mode: 'production',
-  entry: path.resolve('./src/remote/index.tsx'),
+export const webpackConfig: Configuration = {
+  mode: 'none',
   output: {
-    path: path.resolve('./dist/remote'),
-    filename: '[name].[contenthash:8].js',
+    filename: 'index.js',
     chunkFilename: '[id].[contenthash:8].js',
     clean: true,
     hashFunction: 'xxhash64',
 
     // umd
-    library: 'remote',
+    library: 'remote-module',
     libraryTarget: 'umd',
     globalObject: 'window',
   },
@@ -25,12 +21,31 @@ const webpackConfig: Configuration = {
     rules: [
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                file: path.join(__dirname, 'postcss.config.js'),
+              },
+            },
+          },
+        ],
       },
       {
         test: /\.(jsx?|mjs|cjs|tsx?)$/,
         exclude: /node_modules/,
-        use: ['babel-loader', 'thread-loader'],
+        use: [
+          {
+            loader: 'babel-loader',
+            options: {
+              configFile: path.join(__dirname, 'babel.config.js'),
+            },
+          },
+          'thread-loader',
+        ],
       },
       {
         test: /\.(png|jpe?g|gif|svg|webp)$/,
@@ -39,10 +54,8 @@ const webpackConfig: Configuration = {
     ],
   },
   plugins: [
-    new MiniCssExtractPlugin({
-      filename: '[name].[contenthash:8].css',
+    new DefinePlugin({
+      'process.env': JSON.stringify({ NODE_ENV: 'production' }),
     }),
-  ].filter(Boolean),
+  ],
 }
-
-export default webpackConfig

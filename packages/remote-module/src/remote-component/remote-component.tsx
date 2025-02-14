@@ -3,7 +3,7 @@ import { ReactNode, Suspense, useMemo } from 'react'
 
 interface Props<T = any> {
   url: string
-  componentProps: T
+  componentProps?: T
   children?: ReactNode
 }
 
@@ -19,7 +19,7 @@ export default function RemoteComponent({
   }, [url])
 
   return (
-    <Suspense>
+    <Suspense fallback={'loading'}>
       <Component {...componentProps}> {children}</Component>
     </Suspense>
   )

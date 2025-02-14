@@ -98,7 +98,7 @@ const webpackConfig: WebpackConfiguration = {
     new container.ModuleFederationPlugin({
       name: 'hostApp',
       remotes: {
-        remoteApp: 'remoteApp@http://localhost:9002/remoteEntry.js',
+        remoteApp: `remoteApp@http://localhost:${isDevelopment ? 9002 : 3000}/remoteEntry.js`,
       },
       shared: {
         react: { singleton: true, eager: true },
