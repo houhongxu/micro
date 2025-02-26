@@ -1,5 +1,6 @@
 import App from './App'
 import { APP_ENUM, MICRO_CONFIG } from './consts'
+import './style.css'
 import { registerMicroApps, setDefaultMountApp, start } from 'qiankun'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'

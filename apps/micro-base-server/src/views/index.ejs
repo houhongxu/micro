@@ -5,10 +5,15 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Micro</title>
+    <%- htmlEntry.cssLinks %>
   </head>
   <body>
+    <script src="<%= configPrefix %>/lib/react-<%= version.react %>.min.js"></script>
+    <script src="<%= configPrefix %>/lib/react-dom-<%= version.react %>.min.js"></script>
+
     <div id="base-root"></div>
     <div id="base-container"></div>
-    <script type="module" src="/src/index.tsx"></script>
   </body>
+
+  <%- htmlEntry.jsScripts %>
 </html>
