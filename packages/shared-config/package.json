@@ -1,12 +1,13 @@
 {
-  "name": "config",
+  "name": "shared-config",
   "version": "0.0.1",
-  "description": "config",
+  "description": "shared-config",
   "scripts": {
     "build": "rm -rf ./lib && tsc",
     "dev": "tsc --watch"
   },
   "main": "./lib/index.js",
+  "module": "./lib/index.js",
   "types": "./lib/index.d.ts",
   "files": [
     "./lib"

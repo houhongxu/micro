@@ -1,8 +1,7 @@
 import { MICRO_BASE_HTML_PATH } from './constants'
-import { Config } from './mock-config'
 import * as cheerio from 'cheerio'
 import { readFileSync } from 'fs'
-import path from 'path'
+import { Config } from 'shared-config'
 
 export function getHtmlEntry(): Config['htmlEntry'] {
   const html = readFileSync(MICRO_BASE_HTML_PATH, 'utf-8')

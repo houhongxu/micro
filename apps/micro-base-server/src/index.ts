@@ -1,9 +1,9 @@
 import { MICRO_BASE_ASSETS_PATH, PORT } from './constants'
-import { config } from './mock-config'
 import { nacosConfig } from './mock-nacos'
 import { getHtmlEntry } from './utils'
 import express from 'express'
 import path from 'path'
+import { sharedConfig } from 'shared-config'
 
 const app = express()
 
@@ -18,7 +18,7 @@ app.get('/', (req, res) => {
 
   const env = nacosConfig[url]
 
-  const currentConfig = config[env]
+  const currentConfig = sharedConfig[env]
 
   currentConfig.htmlEntry = getHtmlEntry()
 

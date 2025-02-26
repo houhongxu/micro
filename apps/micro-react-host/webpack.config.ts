@@ -2,17 +2,18 @@ import { name as packageName } from './package.json'
 import { ModuleFederationPlugin } from '@module-federation/enhanced/webpack'
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin'
 import BlurhashWebpackPlugin from 'blurhash-webpack-plugin'
-import { config } from 'dotenv'
+import { config as resolveEnv } from 'dotenv'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import path from 'path'
+import { sharedConfig } from 'shared-config'
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
-import { DefinePlugin, container } from 'webpack'
+import { DefinePlugin } from 'webpack'
 import { WebpackConfiguration } from 'webpack-dev-server'
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
-const env = config({
+const env = resolveEnv({
   path: path.join(__dirname, `./.env.${process.env.NODE_ENV}`),
 })
 
@@ -42,7 +43,7 @@ const webpackConfig: WebpackConfiguration = {
     extensions: ['.js', '.mjs', '.cjs', '.jsx', '.ts', '.tsx'],
     plugins: [new TsconfigPathsPlugin()],
   },
-
+  externals: sharedConfig['dev']['externals'],
   optimization: {
     // 最小化 __webpack_require__.u 内容改变的影响，分离webpack runtime文件
     runtimeChunk: {

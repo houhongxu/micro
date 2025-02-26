@@ -11,6 +11,7 @@
     "ejs": "^3.1.10",
     "express": "^4.21.2",
     "lru-cache": "^11.0.2",
-    "tsx": "^4.19.3"
+    "tsx": "^4.19.3",
+    "shared-config": "workspace:*"
   }
 }
