@@ -8,8 +8,7 @@
     "resolveJsonModule": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "declaration": true,
-    "jsx": "react-jsx"
+    "declaration": true
   },
   "include": ["src/**/*"]
 }

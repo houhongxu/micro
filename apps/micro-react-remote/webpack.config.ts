@@ -5,10 +5,9 @@ import BlurhashWebpackPlugin from 'blurhash-webpack-plugin'
 import { config } from 'dotenv'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
-// import ModuleFederationRuntimePlugin from 'module-federation-runtime-webpack-plugin'
 import path from 'path'
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
-import { DefinePlugin, container } from 'webpack'
+import { DefinePlugin } from 'webpack'
 import { WebpackConfiguration } from 'webpack-dev-server'
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
@@ -96,20 +95,7 @@ const webpackConfig: WebpackConfiguration = {
     }),
     isDevelopment && new ReactRefreshWebpackPlugin(),
     new BlurhashWebpackPlugin(),
-    // new ModuleFederationPlugin({
-    //   name: 'remoteApp',
-    //   filename: remoteFileName,
-    //   exposes: {
-    //     './Button': './src/components/Button',
-    //   },
-    //   shared: {
-    //     react: { singleton: true, eager: true },
-    //     'react-dom': { singleton: true, eager: true },
-    //   },
-    //   experiments: { federationRuntime: 'hoisted' }, // v2 https://module-federation.io/blog/hoisted-runtime.html
-    //   library: { type: 'umd', name: 'remoteApp' }, // qiankun使用umd规范 https://github.com/umijs/qiankun/issues/1394#issuecomment-848495620
-    // }),
-    new container.ModuleFederationPlugin({
+    new ModuleFederationPlugin({
       name: 'remoteApp',
       filename: remoteFileName,
       exposes: {
@@ -121,7 +107,6 @@ const webpackConfig: WebpackConfiguration = {
       },
       library: { type: 'umd', name: 'remoteApp' }, // qiankun使用umd规范 https://github.com/umijs/qiankun/issues/1394#issuecomment-848495620
     }),
-    // new ModuleFederationRuntimePlugin({ fileName: remoteFileName }),
   ].filter(Boolean),
   devServer: {
     static: {

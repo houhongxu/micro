@@ -1,0 +1,16 @@
+{
+  "name": "micro-base-server",
+  "version": "0.0.1",
+  "description": "micro-base-server",
+  "scripts": {
+    "start": "tsx watch ./src/index.ts"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "cheerio": "^1.0.0",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "lru-cache": "^11.0.2",
+    "tsx": "^4.19.3"
+  }
+}
