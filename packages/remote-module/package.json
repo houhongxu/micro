@@ -1,6 +1,6 @@
 {
   "name": "remote-module",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "remote-module",
   "scripts": {
     "build": "rm -rf ./lib && tsc",
