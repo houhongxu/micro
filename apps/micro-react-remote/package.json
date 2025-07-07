@@ -5,7 +5,6 @@
     "lint": "eslint ./src/**/*.{ts,tsx}",
     "dev": "cross-env NODE_ENV=development webpack serve",
     "build": "cross-env NODE_ENV=production webpack",
-    "build:remote": "ts-node ./scripts/remote-module.ts",
     "serve": "cross-env NODE_ENV=production webpack && npm run build:remote && npx serve ./dist --cors"
   },
   "keywords": [],
@@ -15,10 +14,9 @@
     "ahooks": "^3.7.10",
     "high-order-ui": "^0.0.3",
     "query-string": "^8.1.0",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
     "react-router-dom": "^6.21.1",
-    "remote-module": "workspace:*",
     "viewerjs": "^1.11.6"
   },
   "devDependencies": {
@@ -60,7 +58,6 @@
     "tsconfig-paths-webpack-plugin": "^4.1.0",
     "webpack": "^5.89.0",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^4.15.1",
-    "shared-config": "workspace:*"
+    "webpack-dev-server": "^4.15.1"
   }
 }
