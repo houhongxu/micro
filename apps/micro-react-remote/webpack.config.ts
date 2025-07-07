@@ -6,7 +6,6 @@ import { config } from 'dotenv'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import path from 'path'
-import { sharedConfig } from 'shared-config'
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
 import { DefinePlugin } from 'webpack'
 import { WebpackConfiguration } from 'webpack-dev-server'
@@ -44,7 +43,6 @@ const webpackConfig: WebpackConfiguration = {
     extensions: ['.js', '.mjs', '.cjs', '.jsx', '.ts', '.tsx'],
     plugins: [new TsconfigPathsPlugin()],
   },
-  externals: sharedConfig['dev']['externals'],
   optimization: {
     // 最小化 __webpack_require__.u 内容改变的影响，分离webpack runtime文件
     runtimeChunk: false, // module federation 导致无法使用，尝试了两种方法尚未解决

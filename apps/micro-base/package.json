@@ -11,8 +11,8 @@
   },
   "dependencies": {
     "qiankun": "^2.10.16",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
     "react-router-dom": "^6.21.1"
   },
   "devDependencies": {
@@ -24,7 +24,6 @@
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
-    "shared-config": "workspace:*",
     "typescript": "^5.2.2",
     "vite": "^5.3.4",
     "vite-plugin-externals": "^0.6.2"

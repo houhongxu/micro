@@ -8,7 +8,7 @@ export interface Config {
 export const sharedConfig: Record<string, Config> = {
   dev: {
     configPrefix: '',
-    version: { react: '18.0.0' },
+    version: { react: '18.2.0' },
     externals: { react: 'React', 'react-dom': 'ReactDOM' },
   },
 }
