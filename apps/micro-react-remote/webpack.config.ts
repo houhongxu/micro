@@ -3,6 +3,7 @@ import { ModuleFederationPlugin } from '@module-federation/enhanced/webpack'
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin'
 import BlurhashWebpackPlugin from 'blurhash-webpack-plugin'
 import { config } from 'dotenv'
+import { readdirSync } from 'fs'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import path from 'path'
@@ -51,9 +52,9 @@ const webpackConfig: WebpackConfiguration = {
 
     // 分包
     splitChunks: {
-      chunks: 'async', // module federation 需要仅分包异步js
+      // chunks: 'async', // module federation 需要仅分包异步js
       // chunks: 'all', // 使用ModuleFederationRuntimePlugin支持
-      // chunks: 'all', // 使用v2支持
+      chunks: 'all', // 使用v2支持
     },
   },
   module: {
@@ -97,8 +98,16 @@ const webpackConfig: WebpackConfiguration = {
     new ModuleFederationPlugin({
       name: 'remoteApp',
       filename: remoteFileName,
-      exposes: {
-        './Button': './src/components/Button',
+      exposes: readdirSync('./src/pages').reduce(
+        (acc, cur) => {
+          acc[`./${cur.split('.')[0]}`] = `./src/pages/${cur}`
+          return acc
+        },
+        {} as Record<string, string>,
+      ),
+      shared: {
+        react: { singleton: true, eager: true },
+        'react-dom': { singleton: true, eager: true },
       },
       library: { type: 'umd', name: 'remoteApp' }, // qiankun使用umd规范 https://github.com/umijs/qiankun/issues/1394#issuecomment-848495620
     }),
