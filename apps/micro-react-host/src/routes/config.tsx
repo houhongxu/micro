@@ -4,10 +4,10 @@ import { RouteObject } from 'react-router-dom'
 
 // 使用普通lazy写法 https://github.com/remix-run/react-router/tree/main/examples/lazy-loading，虽然用了RouterProvider，但是RouterProvider写法比较杂乱且有类型风险，暂时不采用https://github.com/remix-run/react-router/issues/10475
 const HomePage = lazy(() => import('@/pages/home'))
-const ImagePage = lazy(() => import('@/pages/image'))
-const MasonryPage = lazy(() => import('@/pages/masonry'))
-const ScrollViewPage = lazy(() => import('@/pages/scroll-view'))
-const VirtualListPage = lazy(() => import('@/pages/virtual-list'))
+const ImagePage = lazy(() => import('remoteApp/image'))
+const MasonryPage = lazy(() => import('remoteApp/masonry'))
+const ScrollViewPage = lazy(() => import('remoteApp/scroll-view'))
+const VirtualListPage = lazy(() => import('remoteApp/virtual-list'))
 
 export const routesConfig: RouteObject[] = [
   {
