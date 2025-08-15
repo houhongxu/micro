@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 export default function HomePage() {
   return (
     <div className="flex flex-col">
+      <h1>remote</h1>
       {routesConfig[0].children?.map(
         (route) =>
           route.path !== '/' && (

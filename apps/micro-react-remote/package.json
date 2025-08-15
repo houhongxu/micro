@@ -5,7 +5,7 @@
     "lint": "eslint ./src/**/*.{ts,tsx}",
     "dev": "cross-env NODE_ENV=development webpack serve",
     "build": "cross-env NODE_ENV=production webpack",
-    "serve": "cross-env NODE_ENV=production webpack && npm run build:remote && npx serve ./dist --cors"
+    "serve": "npm run build && serve ./dist --cors --listen 9002 --single"
   },
   "keywords": [],
   "author": "",
@@ -50,7 +50,6 @@
     "postcss-loader": "^8.0.0",
     "postcss-preset-env": "^9.3.0",
     "react-refresh": "^0.14.0",
-    "serve": "^14.2.4",
     "style-loader": "^3.3.4",
     "tailwindcss": "^3.4.1",
     "thread-loader": "^4.0.2",

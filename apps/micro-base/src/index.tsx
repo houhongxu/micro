@@ -1,17 +1,17 @@
-import App from './App'
-import { APP_ENUM, MICRO_CONFIG } from './consts'
-import './style.css'
+import HomePage from './pages/home'
+import { MICRO_APP_ENUM, MICRO_CONFIG } from '@/config/micro'
+import '@/styles/global.css'
 import { registerMicroApps, setDefaultMountApp, start } from 'qiankun'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 
 registerMicroApps(MICRO_CONFIG)
 
-setDefaultMountApp(APP_ENUM.vue)
+setDefaultMountApp(MICRO_APP_ENUM.reactHost)
 
 createRoot(document.getElementById('base-root')!).render(
   <BrowserRouter>
-    <App />
+    <HomePage />
   </BrowserRouter>,
 )
 
