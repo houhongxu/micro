@@ -23,7 +23,7 @@
     "@babel/preset-env": "^7.23.8",
     "@babel/preset-react": "^7.23.3",
     "@babel/preset-typescript": "^7.23.3",
-    "@module-federation/enhanced": "^0.6.10",
+    "@module-federation/enhanced": "^0.18.1",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.11",
     "@types/babel__core": "^7.20.5",
     "@types/eslint": "^8.56.2",
@@ -53,7 +53,7 @@
     "thread-loader": "^4.0.2",
     "ts-node": "^10.9.2",
     "tsconfig-paths-webpack-plugin": "^4.1.0",
-    "webpack": "^5.89.0",
+    "webpack": "^5.101.2",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1"
   }

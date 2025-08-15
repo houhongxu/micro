@@ -46,14 +46,10 @@ const webpackConfig: WebpackConfiguration = {
   },
   optimization: {
     // 最小化 __webpack_require__.u 内容改变的影响，分离webpack runtime文件
-    runtimeChunk: false, // module federation 导致无法使用，尝试了两种方法尚未解决
-    // runtimeChunk: 'single', // 使用ModuleFederationRuntimePlugin支持
-    // runtimeChunk: 'single', // 使用v2支持
+    runtimeChunk: 'single', // 使用v2支持
 
     // 分包
     splitChunks: {
-      // chunks: 'async', // module federation 需要仅分包异步js
-      // chunks: 'all', // 使用ModuleFederationRuntimePlugin支持
       chunks: 'all', // 使用v2支持
     },
   },
@@ -110,6 +106,7 @@ const webpackConfig: WebpackConfiguration = {
         'react-dom': { singleton: true, eager: true },
       },
       library: { type: 'umd', name: 'remoteApp' }, // qiankun使用umd规范 https://github.com/umijs/qiankun/issues/1394#issuecomment-848495620
+      runtime: false, // https://github.com/webpack/webpack/issues/18810
     }),
   ].filter(Boolean),
   devServer: {
