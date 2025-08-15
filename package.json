@@ -2,16 +2,13 @@
   "scripts": {
     "dev": "pnpm --recursive --parallel --filter=./apps/** dev",
     "build": "pnpm --recursive --filter=./apps/** build",
-    "build:remote": "pnpm -F micro-react-remote build",
-    "serve:remote": "npx serve -l 9002 apps/micro-react-remote/dist",
-    "build:host": "pnpm -F micro-react-host build",
-    "serve:host": "npx serve -l 9001 apps/micro-react-host/dist",
-    "module": "npx concurrently \"npm run build:remote && npm run serve:remote\" \"npm run build:host && npm run serve:host\""
+    "serve": "pnpm --recursive --parallel --filter=./apps/** serve"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
     "@types/node": "^20.10.5",
     "prettier": "3.2.4",
+    "serve": "^14.2.4",
     "typescript": "^5.2.2"
   },
   "keywords": [],
