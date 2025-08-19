@@ -44,9 +44,7 @@ const webpackConfig: WebpackConfiguration = {
   },
   optimization: {
     // 最小化 __webpack_require__.u 内容改变的影响，分离webpack runtime文件
-    runtimeChunk: {
-      name: 'runtime',
-    },
+    runtimeChunk: true,
     // 分包
     splitChunks: {
       chunks: 'all',

@@ -1,3 +1,4 @@
+import '@/styles/global.css'
 import { ScrollView } from 'high-order-ui'
 
 export default function ScrollViewPage() {
