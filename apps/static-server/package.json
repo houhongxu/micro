@@ -1,0 +1,8 @@
+{
+  "name": "static-server",
+  "version": "0.0.1",
+  "description": "static-server",
+  "scripts": {
+    "serve": "serve ./static --cors --listen 9999"
+  }
+}
