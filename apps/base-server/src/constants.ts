@@ -1,6 +1,6 @@
 import path from 'path'
 
-export const PORT = 3003
+export const PORT = 3000
 
 export const MICRO_BASE_ROOT_PATH = path.join(__dirname, '..', '..')
 
