@@ -10,8 +10,7 @@ const app = express()
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'ejs')
 
-app.use(express.static(path.join(__dirname, 'mock-static')))
-app.use('/assets', express.static(MICRO_BASE_ASSETS_PATH))
+app.use(express.static(MICRO_BASE_ASSETS_PATH))
 
 app.get('/', (req, res) => {
   const url = req.header('X-URL') ?? 'hhxdev.icu'
@@ -22,6 +21,7 @@ app.get('/', (req, res) => {
 
   currentConfig.htmlEntry = getHtmlEntry()
 
+  // 资源怎么加载进来？
   res.render('index', currentConfig)
 })
 

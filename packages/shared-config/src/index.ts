@@ -7,7 +7,7 @@ export interface Config {
 
 export const sharedConfig: Record<string, Config> = {
   dev: {
-    configPrefix: '',
+    configPrefix: 'https://unpkg.com',
     version: { react: '18.2.0' },
     externals: { react: 'React', 'react-dom': 'ReactDOM' },
   },

@@ -11,5 +11,5 @@ export const MICRO_BASE_HTML_PATH = path.join(
 
 export const MICRO_BASE_ASSETS_PATH = path.join(
   MICRO_BASE_ROOT_PATH,
-  './micro-base/dist/assets',
+  './micro-base/dist',
 )
