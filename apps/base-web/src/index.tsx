@@ -7,7 +7,7 @@ import { BrowserRouter } from 'react-router-dom'
 
 registerMicroApps(MICRO_CONFIG)
 
-setDefaultMountApp(MICRO_APP_ENUM.reactHost)
+setDefaultMountApp(MICRO_APP_ENUM.REACT_HOST)
 
 createRoot(document.getElementById('base-root')!).render(
   <BrowserRouter>

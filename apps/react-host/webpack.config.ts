@@ -11,6 +11,8 @@ import { DefinePlugin } from 'webpack'
 import { WebpackConfiguration } from 'webpack-dev-server'
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
+const REMOTE_FILE_NAME = 'remoteEntry.js'
+const REMOTE_URL = `http://localhost:9002/${REMOTE_FILE_NAME}`
 
 const env = resolveEnv({
   path: path.join(__dirname, `./.env.${process.env.NODE_ENV}`),
@@ -21,7 +23,7 @@ if (env.error) {
   process.exit(1)
 }
 
-// 用WebpackConfiguration是因为配置中配置了devServer
+// 用webpack-dev-server的WebpackConfiguration是因为配置中配置了devServer
 const webpackConfig: WebpackConfiguration = {
   mode: isDevelopment ? 'development' : 'production',
   entry: path.join(__dirname, './src/index.tsx'),
@@ -85,7 +87,7 @@ const webpackConfig: WebpackConfiguration = {
     new ModuleFederationPlugin({
       name: 'hostApp',
       remotes: {
-        remoteApp: 'remoteApp@http://localhost:9002/remoteEntry.js',
+        remoteApp: `remoteApp@${REMOTE_URL}`,
       },
       shared: {
         react: { singleton: true, eager: true },

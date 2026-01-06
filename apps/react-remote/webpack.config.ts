@@ -12,7 +12,7 @@ import { DefinePlugin } from 'webpack'
 import { WebpackConfiguration } from 'webpack-dev-server'
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
-const remoteFileName = 'remoteEntry.js'
+const REMOTE_FILE_NAME = 'remoteEntry.js'
 
 const env = config({
   path: path.join(__dirname, `./.env.${process.env.NODE_ENV}`),
@@ -93,7 +93,7 @@ const webpackConfig: WebpackConfiguration = {
     new BlurhashWebpackPlugin(),
     new ModuleFederationPlugin({
       name: 'remoteApp',
-      filename: remoteFileName,
+      filename: REMOTE_FILE_NAME,
       exposes: readdirSync('./src/pages').reduce(
         (acc, cur) => {
           acc[`./${cur.split('.')[0]}`] = `./src/pages/${cur}`
