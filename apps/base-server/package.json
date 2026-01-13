@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "micro-base-server",
   "scripts": {
-    "dev": "pnpm -F shared-config build && pnpm -F base-web build && tsx watch ./src/index.ts"
+    "dev": "pnpm -F base-web build && tsx watch ./src/index.ts"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
@@ -11,7 +11,6 @@
     "ejs": "^3.1.10",
     "express": "^4.21.2",
     "lru-cache": "^11.0.2",
-    "shared-config": "workspace:*",
     "tsx": "^4.19.3"
   },
   "dependencies": {

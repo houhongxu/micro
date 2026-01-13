@@ -1,15 +1,21 @@
+import { NacosConfigReg } from './types/nacos'
 import path from 'path'
 
 export const PORT = 3000
 
-export const MICRO_BASE_ROOT_PATH = path.join(__dirname, '..', '..')
+export const ROOT_PATH = path.join(__dirname, '..', '..')
 
-export const MICRO_BASE_HTML_PATH = path.join(
-  MICRO_BASE_ROOT_PATH,
+export const BASE_WEB_HTML_PATH = path.join(
+  ROOT_PATH,
   './base-web/dist/index.html',
 )
 
-export const MICRO_BASE_ASSETS_PATH = path.join(
-  MICRO_BASE_ROOT_PATH,
-  './base-web/dist',
+export const BASE_WEB_STATIC_PATH = path.join(
+  ROOT_PATH,
+  './base-web/dist/static',
 )
+
+export const DEFAULT_NACOS_CONFIG_REG: NacosConfigReg = {
+  dataId: 'deafault_micro_nacos_config',
+  group: 'DEFAULT_GROUP',
+}

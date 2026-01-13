@@ -24,8 +24,8 @@ const webpackConfig: WebpackConfiguration = {
   entry: path.join(__dirname, './src/index.tsx'),
   output: {
     path: path.join(__dirname, './dist'),
-    filename: '[name].[contenthash:8].js',
-    chunkFilename: '[id].[contenthash:8].js',
+    filename: 'static/js/[name].[contenthash:8].js',
+    chunkFilename: 'static/js/[id].[contenthash:8].js',
     clean: true,
     hashFunction: 'xxhash64',
   },
@@ -57,8 +57,20 @@ const webpackConfig: WebpackConfiguration = {
         use: ['babel-loader', 'thread-loader'],
       },
       {
+        type: 'asset/inline',
+        test: /\.(png|jpe?g|gif|svg|webp)$/,
+        parser: {
+          dataUrlCondition: {
+            maxSize: 10240,
+          },
+        },
+      },
+      {
         test: /\.(png|jpe?g|gif|svg|webp)$/,
         type: 'asset/resource',
+        generator: {
+          filename: 'static/images/[name].[contenthash:8][ext]',
+        },
       },
     ],
   },
@@ -68,7 +80,7 @@ const webpackConfig: WebpackConfiguration = {
       template: path.join(__dirname, './src/templates/index.html'),
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].[contenthash:8].css',
+      filename: 'static/css/[name].[contenthash:8].css',
     }),
     isDevelopment && new ReactRefreshWebpackPlugin(),
   ].filter(Boolean),

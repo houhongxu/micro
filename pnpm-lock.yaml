@@ -45,9 +45,6 @@ importers:
       lru-cache:
         specifier: ^11.0.2
         version: 11.1.0
-      shared-config:
-        specifier: workspace:*
-        version: link:../../packages/shared-config
       tsx:
         specifier: ^4.19.3
         version: 4.20.3
@@ -243,8 +240,8 @@ importers:
         specifier: ^9.1.3
         version: 9.2.1(@babel/core@7.26.0)(webpack@5.101.3)
       blurhash-webpack-plugin:
-        specifier: ^0.0.5
-        version: 0.0.5(sharp@0.33.5)
+        specifier: ^0.0.6
+        version: 0.0.6(sharp@0.33.5)
       cross-env:
         specifier: ^7.0.3
         version: 7.0.3
@@ -382,8 +379,8 @@ importers:
         specifier: ^9.1.3
         version: 9.2.1(@babel/core@7.26.0)(webpack@5.101.3)
       blurhash-webpack-plugin:
-        specifier: ^0.0.5
-        version: 0.0.5(sharp@0.33.5)
+        specifier: ^0.0.6
+        version: 0.0.6(sharp@0.33.5)
       cross-env:
         specifier: ^7.0.3
         version: 7.0.3
@@ -526,8 +523,6 @@ importers:
       webpack-dev-server:
         specifier: ^4.15.1
         version: 4.15.2(webpack-cli@5.1.4)(webpack@5.95.0)
-
-  packages/shared-config: {}
 
 packages:
 
@@ -4864,7 +4859,7 @@ packages:
     dependencies:
       '@babel/core': 7.26.0
       find-cache-dir: 4.0.0
-      schema-utils: 4.2.0
+      schema-utils: 4.3.2
       webpack: 5.95.0(webpack-cli@5.1.4)
     dev: true
 
@@ -4922,6 +4917,15 @@ packages:
 
   /blurhash-webpack-plugin@0.0.5(sharp@0.33.5):
     resolution: {integrity: sha512-/Oc0gRlX6Sd2nbK1ws39TwlYBNkTZHUSYoh5Yvhvwkj4zG/gKw+A/K8GfuGlxoeLshAewcjsxtrbKbkmaql/LA==}
+    peerDependencies:
+      sharp: ^0.33.2
+    dependencies:
+      blurhash: 2.0.5
+      sharp: 0.33.5
+    dev: true
+
+  /blurhash-webpack-plugin@0.0.6(sharp@0.33.5):
+    resolution: {integrity: sha512-ztM2qwUWRSwZHBTAzIbH5w66HCgE8XfaW20dO+34xdx4GzVy1W3BfZk3OnGtofi3X+XgS7BwwAuBlzB865mg/w==}
     peerDependencies:
       sharp: ^0.33.2
     dependencies:

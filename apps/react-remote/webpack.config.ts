@@ -29,8 +29,8 @@ const webpackConfig: WebpackConfiguration = {
   entry: path.join(__dirname, './src/index.tsx'),
   output: {
     path: path.join(__dirname, './dist'),
-    filename: '[name].[contenthash:8].js',
-    chunkFilename: '[id].[contenthash:8].js',
+    filename: 'static/js/[name].[contenthash:8].js',
+    chunkFilename: 'static/js/[id].[contenthash:8].js',
     clean: true,
     hashFunction: 'xxhash64',
 
@@ -87,10 +87,12 @@ const webpackConfig: WebpackConfiguration = {
       },
     }),
     new MiniCssExtractPlugin({
-      filename: '[name].[contenthash:8].css',
+      filename: 'static/css/[name].[contenthash:8].css',
     }),
     isDevelopment && new ReactRefreshWebpackPlugin(),
-    new BlurhashWebpackPlugin(),
+    new BlurhashWebpackPlugin({
+      filename: 'static/images/[name].[contenthash:8][ext]',
+    }),
     new ModuleFederationPlugin({
       name: 'remoteApp',
       filename: REMOTE_FILE_NAME,
