@@ -20,12 +20,14 @@
     "viewerjs": "^1.11.6"
   },
   "devDependencies": {
+    "shared-config": "workspace:*",
     "@babel/core": "^7.23.7",
     "@babel/preset-env": "^7.23.8",
     "@babel/preset-react": "^7.23.3",
     "@babel/preset-typescript": "^7.23.3",
-    "@module-federation/enhanced": "^0.18.1",
+    "@module-federation/enhanced": "^0.22.1",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.11",
+    "@tailwindcss/postcss": "^4.1.12",
     "@types/babel__core": "^7.20.5",
     "@types/eslint": "^8.56.2",
     "@types/react": "^18.2.48",
@@ -51,7 +53,6 @@
     "react-refresh": "^0.14.0",
     "style-loader": "^3.3.4",
     "tailwindcss": "^4.1.12",
-    "@tailwindcss/postcss": "^4.1.12",
     "thread-loader": "^4.0.2",
     "ts-node": "^10.9.2",
     "tsconfig-paths-webpack-plugin": "^4.1.0",

@@ -3,6 +3,7 @@ import { config } from 'dotenv'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import path from 'path'
+import { sharedConfig } from 'shared-config'
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
 import { DefinePlugin } from 'webpack'
 import { WebpackConfiguration } from 'webpack-dev-server'
@@ -23,6 +24,7 @@ const webpackConfig: WebpackConfiguration = {
   mode: isDevelopment ? 'development' : 'production',
   entry: path.join(__dirname, './src/index.tsx'),
   output: {
+    publicPath: 'auto',
     path: path.join(__dirname, './dist'),
     filename: 'static/js/[name].[contenthash:8].js',
     chunkFilename: 'static/js/[id].[contenthash:8].js',
@@ -68,9 +70,6 @@ const webpackConfig: WebpackConfiguration = {
       {
         test: /\.(png|jpe?g|gif|svg|webp)$/,
         type: 'asset/resource',
-        generator: {
-          filename: 'static/images/[name].[contenthash:8][ext]',
-        },
       },
     ],
   },
@@ -84,6 +83,7 @@ const webpackConfig: WebpackConfiguration = {
     }),
     isDevelopment && new ReactRefreshWebpackPlugin(),
   ].filter(Boolean),
+  externals: sharedConfig.webpackExternals,
   devServer: {
     static: {
       directory: path.join(__dirname, './public'), //托管静态资源public文件夹

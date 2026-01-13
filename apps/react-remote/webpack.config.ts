@@ -7,12 +7,14 @@ import { readdirSync } from 'fs'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import path from 'path'
+import { sharedConfig } from 'shared-config'
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
 import { DefinePlugin } from 'webpack'
 import { WebpackConfiguration } from 'webpack-dev-server'
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
 const REMOTE_FILE_NAME = 'remoteEntry.js'
+const REAMOE_NAME = 'remoteApp'
 
 const env = config({
   path: path.join(__dirname, `./.env.${process.env.NODE_ENV}`),
@@ -28,6 +30,7 @@ const webpackConfig: WebpackConfiguration = {
   mode: isDevelopment ? 'development' : 'production',
   entry: path.join(__dirname, './src/index.tsx'),
   output: {
+    publicPath: 'auto',
     path: path.join(__dirname, './dist'),
     filename: 'static/js/[name].[contenthash:8].js',
     chunkFilename: 'static/js/[id].[contenthash:8].js',
@@ -94,7 +97,7 @@ const webpackConfig: WebpackConfiguration = {
       filename: 'static/images/[name].[contenthash:8][ext]',
     }),
     new ModuleFederationPlugin({
-      name: 'remoteApp',
+      name: REAMOE_NAME,
       filename: REMOTE_FILE_NAME,
       exposes: readdirSync('./src/pages').reduce(
         (acc, cur) => {
@@ -103,11 +106,8 @@ const webpackConfig: WebpackConfiguration = {
         },
         {} as Record<string, string>,
       ),
-      shared: {
-        react: { singleton: true, eager: true },
-        'react-dom': { singleton: true, eager: true },
-      },
-      library: { type: 'umd', name: 'remoteApp' }, // qiankun使用umd规范 https://github.com/umijs/qiankun/issues/1394#issuecomment-848495620
+      shared: sharedConfig.moduleFederationShared,
+      library: { type: 'umd', name: REAMOE_NAME }, // qiankun使用umd规范 https://github.com/umijs/qiankun/issues/1394#issuecomment-848495620
       // 通过在远程组件中`import '@/styles/global.css'`将tailwindcss引入到remoteApp中，否则在hostApp使用时因为检测不到类而丢失样式 https://stackoverflow.com/questions/76967231/tailwind-not-working-when-components-are-shared-through-webpack-module-federation
     }),
   ].filter(Boolean),

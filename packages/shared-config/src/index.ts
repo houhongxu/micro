@@ -1,14 +1,17 @@
 export interface Config {
-  configPrefix: string
-  version: Record<string, string>
-  htmlEntry?: { cssLinks: string; jsScripts: string }
-  externals: Record<string, string>
+  webpackExternals: Record<string, string>
+  moduleFederationShared: Record<string, { singleton: boolean; eager: boolean }>
 }
 
-export const sharedConfig: Record<string, Config> = {
-  dev: {
-    configPrefix: 'https://unpkg.com',
-    version: { react: '18.2.0' },
-    externals: { react: 'React', 'react-dom': 'ReactDOM' },
+export const sharedConfig: Config = {
+  webpackExternals: {
+    react: 'React',
+    'react-dom': 'ReactDOM',
+    'high-order-ui': 'HighOrderUI',
+  },
+  moduleFederationShared: {
+    react: { singleton: true, eager: true },
+    'react-dom': { singleton: true, eager: true },
+    'high-order-ui': { singleton: true, eager: true },
   },
 }

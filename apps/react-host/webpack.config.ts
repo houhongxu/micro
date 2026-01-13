@@ -6,11 +6,14 @@ import { config as resolveEnv } from 'dotenv'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import path from 'path'
+import { sharedConfig } from 'shared-config'
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
 import { DefinePlugin } from 'webpack'
 import { WebpackConfiguration } from 'webpack-dev-server'
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
+const HOST_NAME = 'hostApp'
+const REMOTE_NAME = 'remoteApp'
 const REMOTE_FILE_NAME = 'remoteEntry.js'
 const REMOTE_URL = `http://localhost:9002/${REMOTE_FILE_NAME}`
 
@@ -28,7 +31,7 @@ const webpackConfig: WebpackConfiguration = {
   mode: isDevelopment ? 'development' : 'production',
   entry: path.join(__dirname, './src/index.tsx'),
   output: {
-    publicPath: '/',
+    publicPath: 'auto',
     path: path.join(__dirname, './dist'),
     filename: 'static/js/[name].[contenthash:8].js',
     chunkFilename: 'static/js/[id].[contenthash:8].js',
@@ -100,14 +103,11 @@ const webpackConfig: WebpackConfiguration = {
       filename: 'static/images/[name].[contenthash:8][ext]',
     }),
     new ModuleFederationPlugin({
-      name: 'hostApp',
+      name: HOST_NAME,
       remotes: {
-        remoteApp: `remoteApp@${REMOTE_URL}`,
+        [REMOTE_NAME]: `${REMOTE_NAME}@${REMOTE_URL}`,
       },
-      shared: {
-        react: { singleton: true, eager: true },
-        'react-dom': { singleton: true, eager: true },
-      },
+      shared: sharedConfig.moduleFederationShared,
     }),
   ].filter(Boolean),
   devServer: {
