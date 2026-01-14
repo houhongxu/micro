@@ -1,5 +1,4 @@
 import { dataConfig } from '@/config'
-import '@/styles/global.css'
 import { getImageData } from '@/utils'
 import { Image } from 'high-order-ui'
 

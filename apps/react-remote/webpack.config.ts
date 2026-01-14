@@ -6,6 +6,7 @@ import { config } from 'dotenv'
 import { readdirSync } from 'fs'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import ModuleFederationTailwindPlugin from 'module-federation-tailwind-webpack-plugin'
 import path from 'path'
 import { sharedConfig } from 'shared-config'
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
@@ -13,8 +14,17 @@ import { DefinePlugin } from 'webpack'
 import { WebpackConfiguration } from 'webpack-dev-server'
 
 const isDevelopment = process.env.NODE_ENV !== 'production'
+
 const REMOTE_FILE_NAME = 'remoteEntry.js'
 const REAMOE_NAME = 'remoteApp'
+
+const exposes = readdirSync('./src/pages').reduce(
+  (acc, cur) => {
+    acc[`./${cur.split('.')[0]}`] = `./src/pages/${cur}`
+    return acc
+  },
+  {} as Record<string, string>,
+)
 
 const env = config({
   path: path.join(__dirname, `./.env.${process.env.NODE_ENV}`),
@@ -54,6 +64,27 @@ const webpackConfig: WebpackConfiguration = {
     // 分包
     splitChunks: {
       chunks: 'all', // 使用v2支持
+      cacheGroups: {
+        // 将 tailwind.css 虚拟模块的 CSS 合并到一个公共 chunk
+        // 避免每个 expose 组件都生成独立的 CSS chunk
+        tailwind: {
+          name: 'tailwind',
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          test: (module: any) => {
+            // 检查是否是 tailwind.css 虚拟模块
+            return (
+              module.resource &&
+              typeof module.resource === 'string' &&
+              module.resource.includes(
+                'module-federation-tailwind-webpack-plugin.css',
+              )
+            )
+          },
+          chunks: 'all',
+          enforce: true,
+          priority: 20,
+        },
+      },
     },
   },
   module: {
@@ -70,7 +101,17 @@ const webpackConfig: WebpackConfiguration = {
         test: /\.(jsx?|mjs|cjs|tsx?)$/,
         exclude: /node_modules/,
         include: path.join(__dirname, 'src'),
-        use: ['babel-loader', 'thread-loader'],
+        use: [
+          // 需要在 babel-loader 之前执行，以便在源码被处理前注入 import
+          {
+            loader: ModuleFederationTailwindPlugin.loader,
+            options: {
+              exposes,
+            },
+          },
+          'babel-loader',
+          'thread-loader',
+        ],
       },
       {
         test: /\.(png|jpe?g|gif|svg|webp)$/,
@@ -79,6 +120,7 @@ const webpackConfig: WebpackConfiguration = {
     ],
   },
   plugins: [
+    new ModuleFederationTailwindPlugin(),
     new DefinePlugin({ 'process.env': JSON.stringify(env.parsed) }),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, './src/templates/index.html'),
@@ -99,16 +141,10 @@ const webpackConfig: WebpackConfiguration = {
     new ModuleFederationPlugin({
       name: REAMOE_NAME,
       filename: REMOTE_FILE_NAME,
-      exposes: readdirSync('./src/pages').reduce(
-        (acc, cur) => {
-          acc[`./${cur.split('.')[0]}`] = `./src/pages/${cur}`
-          return acc
-        },
-        {} as Record<string, string>,
-      ),
+      exposes,
       shared: sharedConfig.moduleFederationShared,
       library: { type: 'umd', name: REAMOE_NAME }, // qiankun使用umd规范 https://github.com/umijs/qiankun/issues/1394#issuecomment-848495620
-      // 通过在远程组件中`import '@/styles/global.css'`将tailwindcss引入到remoteApp中，否则在hostApp使用时因为检测不到类而丢失样式 https://stackoverflow.com/questions/76967231/tailwind-not-working-when-components-are-shared-through-webpack-module-federation
+      // 通过在远程组件中`import '@/styles/global.css'`将tailwindcss引入到remoteApp/components中，否则在hostApp使用时因为模块依赖没有import css而丢失样式，传统css是每个component都import css的 https://github.com/module-federation/module-federation-examples/discussions/714
     }),
   ].filter(Boolean),
   devServer: {

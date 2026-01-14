@@ -1,0 +1,23 @@
+{
+  "name": "module-federation-tailwind-webpack-plugin",
+  "version": "0.0.1",
+  "description": "Webpack plugin and loader for automatically importing Tailwind CSS in Module Federation expose components",
+  "main": "./lib/index.js",
+  "types": "./lib/index.d.ts",
+  "files": ["./lib"],
+  "scripts": {
+    "build": "rm -rf ./lib && tsc",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "webpack-virtual-modules": "^0.5.0"
+  },
+  "devDependencies": {
+    "@types/webpack": "^5.28.0",
+    "typescript": "^5.3.3",
+    "webpack": "^5.89.0"
+  },
+  "peerDependencies": {
+    "webpack": "^5.0.0"
+  }
+}

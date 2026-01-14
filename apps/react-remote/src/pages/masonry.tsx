@@ -1,7 +1,6 @@
 import { DataType, dataConfig } from '@/config'
 import { useImagesViewer } from '@/hooks/useImagesViewer'
 import { useWindowWidth } from '@/hooks/useWindowWidth'
-import '@/styles/global.css'
 import { getImageData } from '@/utils'
 import { Image, Masonry } from 'high-order-ui'
 import { FunctionComponent, HtmlHTMLAttributes, memo, useState } from 'react'

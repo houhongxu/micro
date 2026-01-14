@@ -1,5 +1,4 @@
 import { dataConfig } from '@/config'
-import '@/styles/global.css'
 import { VirtualList } from 'high-order-ui'
 
 export default function VirtualListPage() {

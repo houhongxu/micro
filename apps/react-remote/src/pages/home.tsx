@@ -1,5 +1,4 @@
 import { routesConfig } from '@/routes/config'
-import '@/styles/global.css'
 import { Link } from 'react-router-dom'
 
 export default function HomePage() {

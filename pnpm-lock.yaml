@@ -414,6 +414,9 @@ importers:
       mini-css-extract-plugin:
         specifier: ^2.7.7
         version: 2.9.1(webpack@5.101.3)
+      module-federation-tailwind-webpack-plugin:
+        specifier: workspace:*
+        version: link:../../packages/module-federation-tailwind-webpack-plugin
       postcss:
         specifier: ^8.4.33
         version: 8.4.47
@@ -456,12 +459,31 @@ importers:
       webpack-dev-server:
         specifier: ^5.2.2
         version: 5.2.2(webpack-cli@6.0.1)(webpack@5.101.3)
+      webpack-virtual-modules:
+        specifier: ^0.6.2
+        version: 0.6.2
 
   packages/module-federation-runtime-webpack-plugin:
     devDependencies:
       webpack:
         specifier: ^5.89.0
         version: 5.95.0(webpack-cli@5.1.4)
+
+  packages/module-federation-tailwind-webpack-plugin:
+    dependencies:
+      webpack-virtual-modules:
+        specifier: ^0.5.0
+        version: 0.5.0
+    devDependencies:
+      '@types/webpack':
+        specifier: ^5.28.0
+        version: 5.28.5
+      typescript:
+        specifier: ^5.3.3
+        version: 5.9.3
+      webpack:
+        specifier: ^5.89.0
+        version: 5.101.3(webpack-cli@6.0.1)
 
   packages/remote-module:
     dependencies:
@@ -3757,6 +3779,19 @@ packages:
     resolution: {integrity: sha512-MK9V6NzAS1+Ud7JV9lJLFqW85VbC9dq3LmwZCuBe4wBDgKC0Kj/jd8Xl+nSviU+Qc3+m7umHHyHg//2KSa0a0Q==}
     dependencies:
       '@types/node': 20.17.4
+    dev: true
+
+  /@types/webpack@5.28.5:
+    resolution: {integrity: sha512-wR87cgvxj3p6D0Crt1r5avwqffqPXUkNlnQ1mjU93G7gCuFjufZR4I6j8cz5g1F1tTYpfOOFvly+cmIQwL9wvw==}
+    dependencies:
+      '@types/node': 20.17.4
+      tapable: 2.2.1
+      webpack: 5.101.3(webpack-cli@6.0.1)
+    transitivePeerDependencies:
+      - '@swc/core'
+      - esbuild
+      - uglify-js
+      - webpack-cli
     dev: true
 
   /@types/ws@8.5.12:
@@ -11321,6 +11356,14 @@ packages:
   /webpack-sources@3.3.3:
     resolution: {integrity: sha512-yd1RBzSGanHkitROoPFd6qsrxt+oFhg/129YzheDGqeustzX0vTZJZsSsQjVQC4yzBQ56K55XU8gaNCtIzOnTg==}
     engines: {node: '>=10.13.0'}
+    dev: true
+
+  /webpack-virtual-modules@0.5.0:
+    resolution: {integrity: sha512-kyDivFZ7ZM0BVOUteVbDFhlRt7Ah/CSPwJdi8hBpkK7QLumUqdLtVfm/PX/hkcnrvr0i77fO5+TjZ94Pe+C9iw==}
+    dev: false
+
+  /webpack-virtual-modules@0.6.2:
+    resolution: {integrity: sha512-66/V2i5hQanC51vBQKPH4aI8NMAcBW59FVBs+rC7eGHupMyfn34q7rZIE+ETlJ+XTevqfUhVVBgSUNSW2flEUQ==}
     dev: true
 
   /webpack@5.101.3(webpack-cli@5.1.4):
