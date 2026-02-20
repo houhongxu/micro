@@ -14,26 +14,36 @@ export const routesConfig: RouteObject[] = [
     path: '/',
     element: <MainLayout></MainLayout>,
     children: [
-      {
-        path: '/',
-        element: <HomePage></HomePage>,
-      },
+      { path: '/', element: <HomePage></HomePage>, handle: { label: '首页' } },
       {
         path: '/masonry',
         element: <MasonryPage></MasonryPage>,
+        handle: { label: 'Masonry' },
       },
       {
         path: '/scroll-view',
         element: <ScrollViewPage></ScrollViewPage>,
+        handle: { label: 'ScrollView' },
       },
       {
         path: '/image',
         element: <ImagePage></ImagePage>,
+        handle: { label: 'Image' },
       },
       {
         path: '/virtual-list',
         element: <VirtualListPage></VirtualListPage>,
+        handle: { label: 'VirtualList' },
       },
     ],
   },
 ]
+
+const layoutChildren = routesConfig[0]?.children ?? []
+export const sidebarMenuItems = layoutChildren.map((r) => {
+  const route = r as { path?: string; handle?: { label: string } }
+  return {
+    key: route.path ?? '/',
+    label: route.handle?.label ?? route.path ?? '',
+  }
+})

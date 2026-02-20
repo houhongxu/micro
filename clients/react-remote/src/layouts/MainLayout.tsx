@@ -1,12 +1,5 @@
+import { sidebarMenuItems } from '@/routes/config'
 import { NavLink, Outlet } from 'react-router-dom'
-
-const sidebarMenuItems = [
-  { key: '/', label: '首页' },
-  { key: '/masonry', label: 'Masonry' },
-  { key: '/scroll-view', label: 'ScrollView' },
-  { key: '/image', label: 'Image' },
-  { key: '/virtual-list', label: 'VirtualList' },
-]
 
 export const MainLayout = () => {
   return (

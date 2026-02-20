@@ -1,18 +1,8 @@
+import { sidebarMenuItems } from '@/routes/config'
 import { Layout, Menu } from 'antd'
 import { Outlet, useLocation, useNavigate } from 'react-router-dom'
 
 const { Header, Content, Sider } = Layout
-
-const sidebarMenuItems = [
-  {
-    key: '/',
-    label: '首页',
-  },
-  {
-    key: '/menu',
-    label: '菜单管理',
-  },
-]
 
 export const MainLayout = () => {
   const location = useLocation()
