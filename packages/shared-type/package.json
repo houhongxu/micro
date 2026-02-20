@@ -1,0 +1,20 @@
+{
+  "name": "shared-type",
+  "version": "0.0.1",
+  "description": "shared-type",
+  "scripts": {
+    "build": "tsc"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "./dist"
+  ],
+  "dependencies": {
+    "class-validator": "^0.14.2"
+  },
+  "peerDependencies": {
+    "class-validator": "^0.14.2"
+  },
+  "devDependencies": {}
+}

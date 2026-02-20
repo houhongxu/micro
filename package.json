@@ -9,7 +9,10 @@
     "@types/node": "^20.10.5",
     "prettier": "3.2.4",
     "serve": "^14.2.4",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "@nestjs/mapped-types": "*",
+    "@trpc/client": "^11.8.0",
+    "@trpc/server": "^11.8.0"
   },
   "keywords": [],
   "author": "",
