@@ -1,5 +1,5 @@
 {
-  "name": "base-web",
+  "name": "react-base",
   "description": "",
   "scripts": {
     "lint": "eslint ./src/**/*.{ts,tsx}",

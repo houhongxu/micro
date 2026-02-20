@@ -1,9 +1,9 @@
 {
-  "name": "base-server",
+  "name": "base",
   "version": "0.0.1",
-  "description": "micro-base-server",
+  "description": "base",
   "scripts": {
-    "dev": "pnpm -F base-web build && tsx watch ./src/index.ts"
+    "start:dev": "pnpm -F react-base build && tsx watch ./src/index.ts"
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
