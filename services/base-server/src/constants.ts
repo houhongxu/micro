@@ -1,7 +1,7 @@
 import { NacosConfigReg } from './types/nacos'
 import path from 'path'
 
-export const PORT = 3001
+export const PORT = 9000
 
 export const ROOT_PATH = path.join(__dirname, '..', '..')
 
