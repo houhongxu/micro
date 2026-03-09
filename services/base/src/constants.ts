@@ -1,7 +1,7 @@
 import { NacosConfigReg } from './types/nacos'
 import path from 'path'
 
-export const PORT = 9000
+export const PORT = 8999
 
 // 从 services/base/src 或 services/base/dist 到 monorepo 根目录
 export const ROOT_PATH = path.join(__dirname, '..', '..', '..')

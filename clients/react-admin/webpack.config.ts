@@ -96,6 +96,7 @@ const webpackConfig: WebpackConfiguration = {
     }),
     isDevelopment && new ReactRefreshWebpackPlugin(),
   ].filter(Boolean),
+  externals: sharedConfig.webpackExternals,
   devServer: {
     static: {
       directory: path.join(__dirname, './public'),

@@ -10,13 +10,21 @@ export const routesConfig: RouteObject[] = [
     element: <MainLayout></MainLayout>,
     children: [
       { path: '/', element: <>home</>, handle: { label: '首页' } },
-      { path: '/menu', element: <MenuPage></MenuPage>, handle: { label: '菜单管理' } },
+      {
+        path: '/menu',
+        element: <MenuPage></MenuPage>,
+        handle: { label: '菜单管理' },
+      },
     ],
   },
 ]
 
 const layoutChildren = routesConfig[0]?.children ?? []
+
 export const sidebarMenuItems = layoutChildren.map((r) => {
   const route = r as { path?: string; handle?: { label: string } }
-  return { key: route.path ?? '/', label: route.handle?.label ?? route.path ?? '' }
+  return {
+    key: route.path ?? '/',
+    label: route.handle?.label ?? route.path ?? '',
+  }
 })

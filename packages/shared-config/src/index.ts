@@ -1,6 +1,8 @@
+import { Shared } from '@module-federation/enhanced/dist/src/declarations/plugins/sharing/SharePlugin'
+
 export interface Config {
   webpackExternals: Record<string, string>
-  moduleFederationShared: Record<string, { singleton: boolean; eager: boolean }>
+  moduleFederationShared: Shared
 }
 
 export const sharedConfig: Config = {

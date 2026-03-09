@@ -12,6 +12,7 @@
   "files": [
     "./lib"
   ],
-  "dependencies": {},
-  "devDependencies": {}
+  "dependencies": {
+    "@module-federation/enhanced": "^0.22.1"
+  }
 }

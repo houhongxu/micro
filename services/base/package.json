@@ -14,6 +14,7 @@
     "tsx": "^4.19.3"
   },
   "dependencies": {
-    "nacos": "^2.6.0"
+    "nacos": "^2.6.0",
+    "shared-config": "workspace:*"
   }
 }

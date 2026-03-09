@@ -40,7 +40,7 @@ export class InvokeRecordInterceptor implements NestInterceptor {
         const duration = Date.now() - startTime;
 
         this.logger.log(
-          `[${requestId}] ← ${method} ${path} | ${response.statusCode} | ${duration}ms | Response: ${JSON.stringify(res)?.slice(0, 100)}`,
+          `[${requestId}] ← ${method} ${path} | ${response.statusCode} | ${duration}ms | Response: ${JSON.stringify(res).length > 100 ? JSON.stringify(res).slice(0, 100) + '...' : JSON.stringify(res)}`,
         );
       }),
 

@@ -1,8 +1,11 @@
 {
   "scripts": {
-    "dev": "pnpm --recursive --parallel --filter=./apps/** dev",
-    "build": "pnpm --recursive --filter=./apps/** build",
-    "serve": "pnpm --recursive --parallel --filter=./apps/** serve"
+    "clients:dev": "pnpm --recursive --parallel --filter=./clients/** dev",
+    "clients:build": "pnpm --recursive --filter=./clients/** build",
+    "clients:serve": "pnpm --recursive --parallel --filter=./clients/** serve",
+    "services:dev": "pnpm --recursive --parallel --filter=./services/** start:dev",
+    "services:build": "pnpm --recursive --filter=./services/** build",
+    "services:serve": "pnpm --recursive --parallel --filter=./services/** serve"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.3.0",
